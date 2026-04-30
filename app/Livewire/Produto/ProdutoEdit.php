@@ -14,19 +14,37 @@ class ProdutoEdit extends Component
     public $qtd_estoque;
     public $qtd_minima;
 
-    public function mount($id){
-       $produto = Produto::find($id);
+    public function mount($id)
+    {
+        $produto = Produto::find($id);
 
-       if($produto == null){
-        session()->flash('error', 'nao encontrado');
-        return redirect()->route('produto.index');
-       }
+        if ($produto == null) {
+            session()->flash('error', 'nao encontrado');
+            return redirect()->route('produto.index');
+        }
 
-       $this->produto_id = $produto->id;
-       $this->nome = $produto->nome;
-       $this->valor = $produto->valor;
-       $this->qtd_estoque = $produto->qtd_estoque;
-       $this->qtd_minima = $produto->qtd_minima;
+        $this->produto_id = $produto->id;
+        $this->nome = $produto->nome;
+        $this->valor = $produto->valor;
+        $this->qtd_estoque = $produto->qtd_estoque;
+        $this->qtd_minima = $produto->qtd_minima;
+    }
+
+    public function update()
+    {
+        $produto = Produto::find($this->produto_id);
+        if ($produto == null) {
+            session()->flash('error', 'nao encontrado');
+            return redirect()->route('produto.index');
+        }
+        $produto->nome = $this->nome;
+        $produto->valor = $this->valor;
+        $produto->qtd_estoque = $this->qtd_estoque;
+        $produto->qtd_minima = $this->qtd_minima;
+
+        $produto->save();
+        session()->flash('success', 'atualizado');
+         return redirect()->route('produto.index');
     }
 
     public function render()
