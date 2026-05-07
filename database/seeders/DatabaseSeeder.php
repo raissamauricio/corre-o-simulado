@@ -33,7 +33,7 @@ class DatabaseSeeder extends Seeder
         ]);
 
         Produto::create([
-            'nome' => 'alicate',
+            'nome' => 'Alicate',
             'valor' => 30,
             'qtd_estoque' => 0,
             'qtd_minima' => 3
