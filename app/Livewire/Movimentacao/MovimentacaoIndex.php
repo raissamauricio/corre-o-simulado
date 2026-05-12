@@ -7,9 +7,12 @@ use Livewire\Component;
 
 class MovimentacaoIndex extends Component
 {
+
+
     public function render()
     {
-        $movimentacao = Movimentacao::all();
-        return view('livewire.movimentacao.movimentacao-index', compact('movimentacao'));
+        $movimentacaos = Movimentacao::orderby('data_movimentacao','desc')->get();
+        return view('livewire.movimentacao.movimentacao-index', compact('movimentacaos'));
     }
+
 }
